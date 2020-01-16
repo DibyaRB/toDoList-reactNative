@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import { StyleSheet, Text, View,FlatList } from 'react-native';
 import Header from './components/header';
+import ToDoItem from './components/todoItem';
 
 export default function App() {
 
@@ -16,6 +17,12 @@ export default function App() {
       text: 'play on the PC', key:'3'
     }
   ]);
+
+  const pressHandler= (key) => {
+    setTodos((prevTodos)=>{
+      return prevTodos.filter(todo => todo.key!=key)
+    })
+  }
   return (
     <View style={styles.container}>
     <Header/>
@@ -27,7 +34,7 @@ export default function App() {
       data={todos} 
       renderItem={({item})=>(
 
-        <Text> {item.text} </Text>
+        <ToDoItem item={item} pressHandler={pressHandler} />
         
       )}
 
